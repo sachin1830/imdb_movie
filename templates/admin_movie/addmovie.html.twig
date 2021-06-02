@@ -1,0 +1,100 @@
+{% extends "admin/admin_navbar.html.twig" %}
+
+{% block title %}
+Add Movie
+{% endblock %}
+
+{% block brand_redirect %}
+
+{{path('admin_panel')}}
+{% endblock %}
+
+{% block content %}
+<div class="container" style="width: 700px; margin-top: 30px;">
+<h2>ADD MOVIE</h1>
+<form  method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="title"> Movie title</label>
+    <input type="text" name="title" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter title" required>
+  </div>
+  <div class="form-group">
+     <label for="exampleInputEmail1">Runtime in minute</label>
+    <input type="number" name="runtime" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter runtime" required>
+  </div>
+  <div class="form-group">
+     <label for="exampleInputEmail1">Movie budget</label>
+    <input type="number" name="budget" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter budget" required>
+  </div>
+  <div class="form-group">
+     <label for="exampleInputEmail1"> Movie release year</label>
+    <input type="number" name="year" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter release year " required>
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlFile1">Choose poster image</label>
+    <input type="file" name="poster" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Languages:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="language[]" id="directer" required>
+        {% for language in fetchLanguage %}
+          <option value="{{language.id}}">{{language.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Country:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="country[]" id="directer" required>
+        {% for country in fetchCountry %}
+          <option value="{{country.id}}">{{country.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Category:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="category[]" id="directer" required>
+        {% for category in fetchCategory %}
+          <option value="{{category.id}}">{{category.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+   <div class="form-group">
+    <label for="directer">Select Directers:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="directer[]" id="directer" required>
+        {% for directer in fetchDirecter %}
+          <option value="{{directer.id}}">{{directer.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Writers:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="writer[]" id="directer" required>
+        {% for writer in fetchWriters %}
+          <option value="{{writer.id}}">{{writer.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Casts:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="cast[]" id="directer" required>
+        {% for cast in fetchCasts %}
+          <option value="{{cast.id}}">{{cast.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Production Company:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="company[]" id="directer" required>
+        {% for company in fetchCompany %}
+          <option value="{{company.id}}">{{company.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+        <label for="exampleFormControlTextarea1">Add description:</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" name="desc" placeholder="Enter movie description" required></textarea>
+ </div>
+  <button type="submit" class="btn btn-warning" name="submit">AddMovie</button>
+</form>
+</div>
+
+{% endblock %}

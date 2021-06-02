@@ -1,0 +1,195 @@
+{% extends "header.html.twig" %}
+
+{% block title %}
+MOVIE CRITIC
+{% endblock %}
+
+{% block brand_redirect %}
+  {% if app.session.has("admin") %}
+
+    {% else %}
+      {{path('load_movies')}}
+  {% endif %}
+
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<style>
+#search{
+    width:550px;
+    margin-left:30px;
+}
+.sliding{
+    height:400px;
+}
+.media {
+      display: flex;
+      margin-top: 10px;
+    }
+
+    .poster {
+      background-color: azure;
+    }
+
+    .trailer {
+      background-color: blanchedalmond;
+      margin-left: 10px;
+    }
+
+    img {
+      height: 400px;
+      width: 300px;
+    }
+
+    #title {
+      
+      color: white;
+    }
+
+    body {
+      background-color: black;
+    }
+    .container{
+      background-color: #d1d1d1;
+      margin-top: 10px;
+    }
+    .fa-star{
+      color:#d9ae30;
+    }
+</style>
+{% endblock %}
+
+{% block nav_items %}
+<form class="form-inline" method="post" action="{{path('search_movie')}}">
+    <input class="form-control mr-sm-2 " id="search" name="moviename" type="search" placeholder="Search by movie name" aria-label="Search" required>
+    <button class="btn btn-outline-light my-2 my-sm-0" name = "submit" type="submit"><i class="fa fa-search"></i></button>
+  </form>
+{% endblock %}
+
+{% block nav_logout %}
+<div class="navbar-text">
+    <a href="{{path('logout')}}" class="btn btn-primary " role="button" aria-pressed="true" title="Logout"><i class="fa fa-sign-out"></i> {{ app.user.name }} </a>
+</div>
+{% endblock %}
+{% block content %}
+ <div class="container">
+    <h1 class="text-white" style="background-color: #787878;"><b>{{fetchMovie.title}}</b></h1>
+    <h4><b>RELEASE : {{fetchMovie.releaseyear}}</b></h4>
+    <span>RUNTIME : ({{fetchMovie.runtime}}) MIN</span>
+    <h4><i class="fa fa-star"></i> {{rating | round(1, 'floor')}} / 10</h4>
+      <div class="media">
+        <div class="poster">
+          <img src="/upload/{{fetchMovie.poster}}" alt="">
+        </div>
+        <div class="trailer">
+          <iframe width="770" height="394" src="{{videoUrl}}" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+       <div class="container-fluid">
+       {% if app.user.name == "Admin" %}
+
+          {% else %}
+              <a href="{{path('user_review',{id: fetchMovie.id})}}" class="btn btn-warning " id="reviewbtn" role="button" aria-pressed="true" style="margin-top:10px"><i class="fa fa-pencil"></i> Write review</a>
+       {% endif %}
+        {% for message in app.flashes('reviewflash') %}
+          <div class="alert alert-success">
+            {{ message }}
+          </div>
+        {% endfor %}
+
+        <div class="Directer" style="margin-top: 30px;">
+          <h5><b>DIRECTER :</b></h5>
+              {% for directer in fetchMovie.directers %}
+              <div style="margin-top:10px">
+                <a href="{{path('directer_details',{id: directer.id})}}"> <img src="/upload/{{directer.image}}" alt="notfound" style="height: 50px; width: 50px; margin-right: 25px;">
+                  <span>{{directer.name}}</span></a>
+              </div>
+              {% endfor %}
+        </div>
+        <div class="writer" style="margin-top: 30px;">
+          <h5><b>WRITER :</b></h5>
+              {% for writer in fetchMovie.writers %}
+              <div style="margin-top:10px">
+                <a href="{{path('writer_details',{id: writer.id})}}"> <img src="/upload/{{writer.image}}" alt="notfound" style="height: 50px; width: 50px; margin-right: 25px;">
+                  <span>{{writer.name}}</span></a>
+                </div>
+              {% endfor %}
+        </div>
+        <div class="language" style="margin-top: 30px;">
+          <h5><b>LANGUAGE :</b></h5>
+              {% for language in fetchMovie.languages %}
+                  <P>{{language.name}}</P>
+              {% endfor %}
+        </div>
+        <div class="category" style="margin-top: 30px;">
+          <h5><b>GENRES :</b></h5>
+              {% for category in fetchMovie.categores %}
+                  <P>{{category.name}}</P>
+              {% endfor %}
+        </div>
+        <div class="category" style="margin-top: 30px;">
+          <h5><b>COUNTRY :</b></h5>
+              {% for country in fetchMovie.countrys %}
+                  <P>{{country.name}}</P>
+              {% endfor %}
+        </div>
+        <div class="category" style="margin-top: 30px;">
+         <h5><b>PRODUCTION COMPANY :</b></h5>
+              {% for produtionCompany in fetchMovie.produtionCompanys %}
+              <div style="margin-top:10px">
+               <a href="{{path('company_details',{id: produtionCompany.id })}}"> <img src="/upload/{{produtionCompany.image}}" alt="notfound" style="height: 50px; width: 50px; margin-right: 25px;">
+                <span>{{produtionCompany.name}}</span></a>
+              </div>
+              {% endfor %}
+        </div>
+        <div class="category" style="margin-top: 30px;">
+          <h5><b>CASTS :</b></h5>
+              {% for cast in fetchMovie.casts %}
+              <div style="margin-top:10px">
+               <a href="{{path('cast_details',{id: cast.id})}}"> <img src="/upload/{{cast.image}}" alt="notfound" style="height: 50px; width: 50px; margin-right: 25px;">
+                <span>{{cast.name}}</span></a>
+              </div>
+              {% endfor %}
+        </div> 
+
+        <div style="margin-top: 30px;">
+          <h5><b>PHOTOS :</b></h5>
+           <div class="row">
+           {% for image in imageArray %}
+             <div class="col-sm-1 col-md-1 col-lg-1">
+                <img src="/upload/{{image}}" alt="not found" style="height: 80px; width: 60px;">
+            </div>
+           {% endfor %}
+           </div>
+           <a href="{{path('media_galary',{id: fetchMovie.id})}}">See all images <i class="fa fa-arrow-right"></i></a>
+        </div>
+
+         <div class="category" style="margin-top: 30px;">
+            <h5><b>DESCRIPTION :</b></h5>
+            <p>{{fetchMovie.description}}</p>
+         </div>
+        
+          <p><b>MOVIE BUDGET : </b><span>{{fetchMovie.moviebudget}}</span></p><hr>
+
+           <h5><b><i class="fa fa-users"></i> ({{fetchMovie.review|length}}) USER REVIEWS : </b></h5>
+          <div class="container">
+          
+          {% for reviews in fetchMovie.review %}
+            {% if app.user.name == "Admin" %}
+                 <p class="text-primary"><span><a href="{{path('delete_comment',{id: reviews.id})}}" title="delete comment"><i class="fa fa-trash text-danger"></i></a></span> <b>{{reviews.user.name}}</b></p>
+               {% else %}
+                   <p class="text-primary"> <b>{{reviews.user.name}}</b></p>
+            {% endif %}
+            <p><i class="fa fa-star"></i> Rate : {{reviews.rating}} / 10</p>
+            <p style="margin-left:20px">{{reviews.review}}<p>
+          {% endfor %}
+          <div>
+         
+       </div>
+    </div>
+{% endblock %}

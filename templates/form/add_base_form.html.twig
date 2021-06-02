@@ -1,0 +1,56 @@
+{% extends "admin/admin_navbar.html.twig" %}
+
+{% block content %}
+<div class="container" style="width: 700px; margin-top: 30px;">
+<h2>{% block form_heading %}{% endblock %}</h1>
+<form method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="title">Name</label>
+    <input type="text" name="name" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter name" required>
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlFile1">Choose directer image</label>
+    <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+  <div class="form-group">
+  <label for="gender">Gender</label>
+     <select id="gender" class="form-control" name="gender">
+        <option selected>FEMALE</option>
+        <option>MALE</option>
+         <option>OTHER</option>
+      </select>
+  </div>
+  <div class="form-group">
+     <label for="exampleInputEmail1">Height</label>
+    <input type="text" name="height" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter height" required>
+  </div>
+  <div class="form-group">
+     <label for="sign">Sign</label>
+     <select id="sign" class="form-control" name="sign">
+        <option selected>Aries</option>
+        <option>Taurus</option>
+         <option>Gemini</option>
+         <option>Cancer</option>
+         <option>Leo</option>
+         <option>Virgo</option>
+         <option>Libra</option>
+         <option>Scorpio</option>
+         <option>Sagittarius</option>
+         <option>Capricorn</option>
+         <option>Aquarius</option>
+         <option>Pisces</option>
+      </select>
+  </div>
+  
+  <div class="form-group">
+        <label for="exampleFormControlTextarea1">Add description:</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" name="desc" placeholder="Enter movie description" required></textarea>
+ </div>
+  
+  <button type="submit" class="btn btn-warning" name="submit">
+  {% block btn_name %}{% endblock %}
+  </button>
+</form>
+</div>
+
+{% endblock %}

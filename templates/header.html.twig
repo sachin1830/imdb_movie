@@ -1,0 +1,25 @@
+{% extends "base.html.twig"%}
+
+{% block body %}
+{% block nav %}
+			<nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #3d3f42;">
+				
+				<a class="navbar-brand" href="
+				{% block brand_redirect %}
+				
+				{% endblock %}">
+				<button type="button" class="btn btn-warning"><b>MOVIE CRITIC</b></button>
+				</a>
+				<ul class="navbar-nav mr-auto">
+				{% block nav_items %}
+				{% endblock %}
+				</ul>
+
+				{% block nav_logout %}
+				{% endblock %}
+				
+			</nav>
+{% endblock %}
+
+{% block content %}{% endblock %}
+{% endblock %}

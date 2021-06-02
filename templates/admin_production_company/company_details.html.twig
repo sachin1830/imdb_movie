@@ -1,0 +1,57 @@
+{% extends "header.html.twig" %}
+
+{% block title %}
+Details page
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<style>
+#search{
+    width:550px;
+    margin-left:30px;
+}
+.sliding{
+    height:400px;
+}
+body{
+  background-color:#d1d1d1;
+}
+
+</style>
+{% endblock %}
+
+{% block nav_items %}
+<form class="form-inline">
+    <input class="form-control mr-sm-2 " id="search" type="search" placeholder="Search by movie name" aria-label="Search">
+    <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+  </form>
+{% endblock %}
+
+{% block nav_logout %}
+<div class="navbar-text">
+    <a href="{{path('logout')}}" class="btn btn-primary " role="button" aria-pressed="true" title="Logout"><i class="fa fa-sign-out"></i>{{ app.user.name }} </a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+ <div class="container" style="margin-top : 30px">
+    <h2>{{fetchDetails.name}}</h2>
+    <img src="/upload/{{fetchDetails.image}}" alt="not found" style="height: 300px; width:200px">
+    
+    <h5 style="margin-top : 30px"><b>PRODUCED MOVIES : </b></h5>
+    {% for movie in fetchDetails.movies %}
+       <div style="margin-top : 15px">
+        <a href="{{path('movie_details',{id: movie.id})}}"> <img src="/upload/{{movie.poster}}" alt="notfound" style="height: 50px; width: 50px; margin-right: 25px;">
+         <span>{{movie.title}} </span></a>
+    </div>
+    {% endfor %}
+   
+    <div style="margin-top: 30px;">
+        <p>{{fetchDetails.about}}</p>
+    </div>
+    
+ </div>
+
+{% endblock %}

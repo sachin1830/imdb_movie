@@ -1,0 +1,61 @@
+{% extends "admin/admin_navbar.html.twig" %}
+
+{% block title %}
+Cast Panel
+{% endblock %}
+
+{% block brand_redirect %}
+{{path('admin_panel')}}
+{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center ;margin-top: 20px"><b>Admin Cast Panel</b></h2>
+<div class="container-fluid">
+{% for message in app.flashes('castnotice') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+<a href="{{path('add_cast')}}" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-plus-circle"></i> Add Cast</a>
+<div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fa fa-arrows-v"></i> Sort
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="{{path('cast_dashboard_desc')}}">New -- old</a>
+    <a class="dropdown-item" href="{{path('cast_dashboard')}}">Old -- new</a>
+  </div>
+</div>
+
+<div style="margin-top:20px; margin-buttom:0px">
+ {{ knp_pagination_render(fetch_casts) }}
+ </div>
+ 
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Cast id</th>
+      <th scope="col">Cast image</th>
+      <th scope="col">Cast name</th>
+      <th scope="col">Cast gender</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for cast in fetch_casts %}
+    <tr>
+      <td scope="row">
+      {{cast.id}}
+     </td>
+      <td><a href="{{path('cast_details',{id: cast.id})}}"><img src="/upload/{{cast.image}}" alt="not found" style="width: 40px; height: 50px;"></a></td>
+      <td>{{cast.name}}</td>
+      <td>{{cast.gender}}</td>
+      <td>
+      <a href="{{path('update_cast',{id: cast.id})}}" class="btn btn-primary " role="button" aria-pressed="true"><i class="fa fa-repeat"></i> Update</a>
+      <a href="{{path('delete_cast',{id: cast.id})}}" class="btn btn-danger" role="button" aria-pressed="true"><i class="fa fa-trash"></i> Delete</a>
+      </td>
+    </tr>
+ {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

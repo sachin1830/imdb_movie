@@ -1,0 +1,40 @@
+{% extends "form/loginformbase.html.twig" %}
+
+{% block formname %}
+Admin Login
+{% endblock %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block formbody %}
+
+<form style="padding-bottom: 20px;" method="POST">
+
+ {% if error %}
+        <div class="alert alert-danger">
+        {{ error.messageKey|trans(error.messageData, 'security') }}</div>
+  {% endif %}
+  
+  <div class="form-group">
+    <label for="exampleInputEmail1">Admin Email </label>
+    <input type="email" name="email" value="{{ last_username }}"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Admin Password</label>
+    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+    <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}">
+  </div>
+    <div class="checkbox mb-3">
+      <label>
+          <input type="checkbox" name="_remember_me"> Remember me
+      </label>
+  </div>
+  <button type="submit" class="btn btn-warning">Login</button>
+
+</form>
+
+
+{% endblock %}

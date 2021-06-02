@@ -1,0 +1,34 @@
+{% extends "admin/admin_navbar.html.twig" %}
+
+{% block title %}
+Add Production Company
+{% endblock %}
+
+{% block brand_redirect %}
+{{path('production_panel')}}
+{% endblock %}
+
+{% block content %}
+<div class="container" style="width: 700px; margin-top: 30px;">
+<h2>ADD PRODUCTION COMPANY</h1>
+<form method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="title">Company name</label>
+    <input type="name" name="name" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter of the company" required>
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlFile1">Choose image</label>
+    <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+  <div class="form-group">
+        <label for="exampleFormControlTextarea1">About company</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" name="about" placeholder="Enter details about company" required></textarea>
+ </div>
+  
+  <button type="submit" class="btn btn-warning" name="submit">
+  Add Company
+  </button>
+</form>
+</div>
+
+{% endblock %}

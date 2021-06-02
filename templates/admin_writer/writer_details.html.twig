@@ -1,0 +1,36 @@
+{% extends "form/details_base.html.twig" %}
+
+{% block name %}
+{{fetchDetails.name}}
+{% endblock %}
+
+{% block image %}
+{{fetchDetails.image}}
+{% endblock %}
+
+{% block gender %}
+{{fetchDetails.gender}}
+{% endblock %}
+
+{% block height %}
+{{fetchDetails.height}}
+{% endblock %}
+
+{% block sign %}
+{{fetchDetails.sign}}
+{% endblock %}
+
+{% block movies %}
+
+     <h5><b>WRITTEN MOVIES : </b></h5>
+    {% for movie in fetchDetails.movies %}
+     <div style="margin-top : 15px">
+        <a href="{{path('movie_details',{id: movie.id})}}"> <img src="/upload/{{movie.poster}}" alt="notfound" style="height: 50px; width: 50px; margin-right: 25px;">
+         <span>{{movie.title}} </span></a>
+    </div>
+    {% endfor %}
+{% endblock %}
+
+{% block description %}
+{{fetchDetails.description}}
+{% endblock %}

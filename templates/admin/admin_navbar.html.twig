@@ -1,0 +1,47 @@
+{% extends "header.html.twig" %}
+
+{% block title %}
+Admin
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         <b> Directer</b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{path('add_directer')}}">New directer</a>
+          <a class="dropdown-item" href="{{path('directer_dashboard')}}">Update directer</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <b>Writer</b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{path('writer_add')}}">New writer</a>
+          <a class="dropdown-item" href="{{path('writer_dashboard')}}">Update writer</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         <b>Production company</b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{path('add_company')}}">New company</a>
+          <a class="dropdown-item" href="{{path('production_panel')}}">Update company</a>
+    </li>
+     <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         <b>Casts</b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{path('add_cast')}}">New cast</a>
+          <a class="dropdown-item" href="{{path('cast_dashboard')}}">Update cast</a>
+    </li>
+    
+{% endblock %}
+
+{% block nav_logout %}
+<div class="navbar-text">
+    <a href="{{path('logout')}}" class="btn btn-primary " role="button" aria-pressed="true" title="Logout"><i class="fa fa-sign-out">Admin</i></a>
+</div>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends "admin/admin_navbar.html.twig" %}
+
+{% block title %}
+Update Movie
+{% endblock %}
+
+{% block brand_redirect %}
+
+{{path('admin_panel')}}
+{% endblock %}
+
+{% block content %}
+<div class="container" style="width: 700px; margin-top: 30px;">
+<h2>UPDATE MOVIE</h1>
+<form  method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="title"> Movie title</label>
+    <input type="text" value="{{fetchMovie.title}}" name="title" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter title" required>
+  </div>
+  <div class="form-group">
+     <label for="exampleInputEmail1">Runtime in minute</label>
+    <input type="number" name="runtime" value="{{fetchMovie.runtime}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter runtime" required>
+  </div>
+  <div class="form-group">
+     <label for="exampleInputEmail1">Movie budget</label>
+    <input type="number" name="budget" value="{{fetchMovie.moviebudget}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter budget" required>
+  </div>
+  <div class="form-group">
+     <label for="exampleInputEmail1"> Movie release year</label>
+    <input type="number" name="year" value="{{fetchMovie.releaseyear}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter release year " required>
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlFile1">Choose poster image</label>
+    <input type="file" name="poster" value="" class="form-control-file" id="exampleFormControlFile1">
+    <img src="/upload/{{fetchMovie.poster}}" alt="not found" height="30px">
+     <span><a href="/upload/{{fetchMovie.poster}}">{{fetchMovie.poster}}</a></span>
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Languages:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="language[]" id="directer" required>
+        {% for language in fetchLanguage %}
+          <option {% for flanguages in fetchMovie.languages %}
+             {% if flanguages.id == language.id  %}selected{% endif %}
+          {% endfor %}
+          value="{{language.id}}">{{language.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Country:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="country[]" id="directer" required>
+        {% for country in fetchCountry %}
+          <option {% for fcountrys in fetchMovie.countrys %}
+             {% if fcountrys.id == country.id  %}selected{% endif %}
+          {% endfor %}
+
+          value="{{country.id}}">{{country.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Category:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="category[]" id="directer" required>
+        {% for category in fetchCategory %}
+          <option {% for fcategores in fetchMovie.categores %}
+            {% if fcategores.id == category.id  %}selected{% endif %}
+          {% endfor %}
+
+          value="{{category.id}}">{{category.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+   <div class="form-group">
+    <label for="directer">Select Directers:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="directer[]" id="directer" required>
+        {% for directer in fetchDirecter %}
+          <option {% for fdirecter in fetchMovie.directers %}
+             {% if fdirecter.id == directer.id  %}selected{% endif %}
+          {% endfor %}
+          
+          value="{{directer.id}}">{{directer.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Writers:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="writer[]" id="directer" required>
+        {% for writer in fetchWriter %}
+          <option {% for fwriter in fetchMovie.writers %}
+             {% if fwriter.id == writer.id  %}selected{% endif %}
+          {% endfor %}
+          
+          value="{{writer.id}}">{{writer.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Casts:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="cast[]" id="directer" required>
+        {% for cast in fetchCast %}
+          <option {% for fcast in fetchMovie.casts %}
+            {% if fcast.id == cast.id  %}selected{% endif %}
+          {% endfor %}
+
+          value="{{cast.id}}">{{cast.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="directer">Select Production Company:</label>
+      <select class="selectpicker" multiple data-live-search="true" name="company[]" id="directer" required>
+        {% for company in fetchCompany %}
+          <option {% for fprodutionCompanys in fetchMovie.produtionCompanys %}
+             {% if fprodutionCompanys.id == company.id  %}selected{% endif %}
+          {% endfor %}
+          value="{{company.id}}">{{company.name}}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+        <label for="exampleFormControlTextarea1">Add description:</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" name="desc" placeholder="Enter movie description" required>
+        {{fetchMovie.description}}
+        </textarea>
+ </div>
+  <button type="submit" class="btn btn-warning" name="submit">Update Movie</button>
+</form>
+</div>
+
+{% endblock %}

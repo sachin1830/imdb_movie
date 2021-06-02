@@ -1,0 +1,64 @@
+{% extends "admin/admin_navbar.html.twig" %}
+
+{% block brand_redirect %}
+{{path('directer_dashboard')}}
+{% endblock %}
+
+{% block content %}
+<div class="container" style="width: 700px; margin-top: 30px;">
+<h2>Update Cast</h1>
+<form method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="title">Name</label>
+    <input type="text" name="name" value="{{fetch_directer.name}}" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter name" required>
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlFile1">Choose directer image</label>
+    <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+     <img src="/upload/{{fetch_directer.image}}" alt="not found" height="30px">
+     <span><a href="/upload/{{fetch_directer.image}}">{{fetch_directer.image}}</a></span>
+  </div>
+  <div class="form-group">
+  <label for="gender">Gender</label>
+     <select id="gender" class="form-control" name="gender" required>
+        <option {% if fetch_directer.gender == 'FEMALE' %}selected{% endif %}>FEMALE</option>
+        <option {% if fetch_directer.gender == 'MALE' %}selected{% endif %}>MALE</option>
+        <option {% if fetch_directer.gender == 'OTHER' %}selected{% endif %}>OTHER</option>
+      </select>
+  </div>
+  <div class="form-group">
+     <label for="exampleInputEmail1">Height</label>
+    <input type="text" name="height" value ="{{fetch_directer.height}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter height" required>
+  </div>
+  <div class="form-group">
+     <label for="sign">Sign</label>
+     <select id="sign" class="form-control" name="sign" required>
+         <option {% if fetch_directer.sign == 'Aries' %}selected{% endif %}>Aries</option>
+         <option {% if fetch_directer.sign == 'Taurus' %}selected{% endif %}>Taurus</option>
+         <option {% if fetch_directer.sign == 'Gemini' %}selected{% endif %}>Gemini</option>
+         <option {% if fetch_directer.sign == 'Cancer' %}selected{% endif %}>Cancer</option>
+         <option {% if fetch_directer.sign == 'Leo' %}selected{% endif %}>Leo</option>
+         <option {% if fetch_directer.sign == 'Virgo' %}selected{% endif %}>Virgo</option>
+         <option {% if fetch_directer.sign == 'Libra' %}selected{% endif %}>Libra</option>
+         <option {% if fetch_directer.sign == 'Scorpio' %}selected{% endif %}>Scorpio</option>
+         <option {% if fetch_directer.sign == 'Sagittarius' %}selected{% endif %}>Sagittarius</option>
+         <option {% if fetch_directer.sign == 'Capricorn' %}selected{% endif %}>Capricorn</option>
+         <option {% if fetch_directer.sign == 'Aquarius' %}selected{% endif %}>Aquarius</option>
+         <option {% if fetch_directer.sign == 'Pisces' %}selected{% endif %}>Pisces</option>
+      </select>
+  </div>
+  
+  <div class="form-group">
+        <label for="exampleFormControlTextarea1">Description</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" name="desc" placeholder="Enter movie description" required>
+        {{fetch_directer.description}}
+        </textarea>
+ </div>
+  
+  <button type="submit" class="btn btn-warning" name="submit">
+  Update Directer
+  </button>
+</form>
+</div>
+
+{% endblock %}

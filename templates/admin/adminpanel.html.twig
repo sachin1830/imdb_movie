@@ -1,0 +1,61 @@
+{% extends "admin/admin_navbar.html.twig" %}
+
+{% block brand_redirect %}
+{{path('admin_panel')}}
+{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center ;margin-top: 20px"><b>Admin Panel</b></h2>
+<div class="container-fluid">
+{% for message in app.flashes('notice') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+{% for message in app.flashes('media') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+<a href="{{path('add_movie')}}" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-plus-circle"></i> Add movies</a>
+<div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fa fa-arrows-v"></i> Sort
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="{{path('admin_panel_desc')}}">New -- old</a>
+    <a class="dropdown-item" href="{{path('admin_panel')}}">Old -- new</a>
+</div>
+</div>
+
+<div style="margin-top:20px; margin-buttom:0px">
+ {{ knp_pagination_render(fetch_movive) }}
+ </div>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Poster</th>
+      <th scope="col">Name</th>
+      <th scope="col">Release</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for movie in fetch_movive %}
+    <tr>
+      <td scope="row">
+      <a href="{{path('movie_details',{id: movie.id})}}"><img src="/upload/{{movie.poster}}" alt="not found" style="width: 50px; height: 50px;"></a>
+     </td>
+      <td>{{movie.title}}</td></a>
+      <td>{{movie.releaseyear}}</td>
+      <td>
+      <a href="{{path('update_movie',{id: movie.id})}}" class="btn btn-primary " role="button" aria-pressed="true"><i class="fa fa-repeat"></i> Update</a>
+      <a href="{{path('add_media',{id: movie.id})}}" class="btn btn-primary " role="button" aria-pressed="true"><i class="fa fa-plus-circle"></i> Add media</a>
+      <a href="{{path('delete_movie',{id: movie.id})}}" class="btn btn-danger " role="button" aria-pressed="true"><i class="fa fa-trash"></i> Delete</a>
+      </td>
+    </tr>
+ {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

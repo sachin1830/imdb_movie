@@ -1,0 +1,33 @@
+{% extends "admin/admin_navbar.html.twig" %}
+
+{% block title %}
+Add media
+{% endblock %}
+
+{% block brand_redirect %}
+
+{{path('admin_panel')}}
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="width: 700px; margin-top: 30px;">
+        <img src="/upload/{{fetchMovie.poster}}" alt="not found" style="height: 200px; width:150px">
+        <h2>ADD MEDIA FILES</h1>
+        {% for message in app.flashes('media_error') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <form  method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Video url</label>
+                    <input type="text" name="video" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter embed url only">
+                 </div>
+             <div class="form-group">
+                <label for="exampleFormControlFile1">Choose media (supported format : jpg , png , jpeg , mkv, mp4)</label>
+                 <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+             <button type="submit" class="btn btn-warning" name="submit">Add Media</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+<style>
+    .logo{
+        height: 45px;
+        width: 150px;
+        margin: auto;
+        border-radius: 8px;
+        padding-top: 10px;
+    }
+    .logo h5{
+        text-align: center;    
+    }
+     .logo a{
+        text-decoration: none;
+        color:black ;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div style="margin-top: 40px">
+<div class="bg-warning logo">
+    <a href="#"><h5><b>MOVIE CRITIC</b></h5><a/>
+</div>
+</div>
+<div class="container" style="width: 500px; margin-top: 20px; border: 1px solid black;">
+<h3 style="margin: 10px; text-align: center"><b>Create Account</b></h3>
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
+<form  method="POST" style="padding-bottom: 20px;">
+  <div class="form-group">
+    <label for="title">Name</label>
+    <input type="text" name="name" value="{{name}}" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter name" required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" name="email" value="{{email}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" name="password" value="{{pass}}" class="form-control" id="exampleInputPassword1" placeholder="Password" placeholder="Enter password"required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Conform password</label>
+    <input type="password" name="cpassword" class="form-control" id="exampleInputPassword1" placeholder="Password" placeholder="Enter conform password"required>
+  </div>
+  <button type="submit" class="btn btn-warning" name="submit">Create your account</button>
+</form>
+<p>Already have an account ? <a class="text-primary" href="{{path('user_login')}}">sign-in<a/></p>
+</div>
+{% endblock %}

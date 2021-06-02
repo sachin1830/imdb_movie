@@ -1,0 +1,94 @@
+{% extends "header.html.twig" %}
+
+{% block title %}
+Media galary
+{% endblock %}
+
+{% block brand_redirect %}
+{{path('load_movies')}}
+{% endblock %}
+
+{% block head %}
+
+<style>
+    #search{
+        width:550px;
+        margin-left:30px;
+
+    }
+
+    body {
+        background-color: black;
+        }
+
+     .container{
+      background-color: #d1d1d1;
+      margin-top: 10px;
+    }
+    .trailer{
+        margin:auto;
+    }
+    .media{
+           
+    }
+</style>
+
+{% endblock %}
+
+{% block nav_items %}
+<form class="form-inline" method="post" action="{{path('search_movie')}}">
+    <input class="form-control mr-sm-2 " id="search" name="moviename" type="search" placeholder="Search by movie name" aria-label="Search" required>
+    <button class="btn btn-outline-light my-2 my-sm-0" name = "submit" type="submit"><i class="fa fa-search"></i></button>
+  </form>
+{% endblock %}
+
+{% block nav_logout %}
+<div class="navbar-text">
+    <a href="{{path('logout')}}" class="btn btn-primary " role="button" aria-pressed="true" title="Logout"><i class="fa fa-sign-out"></i>  {{app.user.name}}</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div class="trailer">
+        {% if videoUrl == "" %}
+
+        <h3>No trailer found<h3>
+
+        {% else %}
+            
+          <iframe width="1070" height="394" src="{{videoUrl}}" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+     {% endif %}
+    </div>
+     <h1 class="text-white" style="background-color: #787878;"><b>{{fetchMovie.title}}</b></h1>
+     <h3 style="margin-top:20px"><b>Photo <i class="fa fa-arrow-right"></i> </b></h3><hr>
+    
+      <div class="media">
+      
+        {% for image in imageArray %}
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                  <img src="/upload/{{image}}" alt="not found" style="height: 200px; width: 150px;">
+              </div>
+          {% endfor %}
+      </div>
+      <h3 style="margin-top:20px"><b>Video <i class="fa fa-arrow-right"></i> </b></h3><hr>
+      <div class="video">
+      {% for video in videoArray %}
+             <div class="col-sm-2 col-md-2 col-lg-2">
+                <video controls style="height: 200px; width: 300px">
+                  <source src="/upload/{{video}}">
+                </video>
+            </div>
+        {% endfor %}
+      </div>
+         
+    
+</div>
+
+
+{% endblock %}

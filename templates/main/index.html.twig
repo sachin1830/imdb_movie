@@ -1,0 +1,74 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+<style>
+.main{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+.user{
+
+  width: 300px;
+  height: 400px;
+}
+.admin{
+  width: 300px;
+  height: 400px;
+  margin-left: 100px;
+}
+body{
+ background-color:  rgb(243, 243, 243);
+}
+
+.logo{
+        height: 45px;
+        width: 150px;
+        border-radius: 8px;
+        padding-top: 10px;
+        margin: auto;
+    }
+    .logo h5{
+        text-align: center;    
+    }
+     .logo a{
+        text-decoration: none;
+        color:black ;
+    }
+    .logo p
+    { 
+      text-align: center;
+      margin-top: 15px;
+    }
+
+#login{
+  margin-top: 40px;
+  text-align: center;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div style="margin-top: 40px">
+    <div class="bg-warning logo">
+        <a href="#"><h5><b>MOVIE CRITIC</b></h5></a>
+        <p>Believe in better </p>
+    </div>
+</div>
+<h2 id="login">LOGIN<i class="fa fa-handshake"></i></h2>
+  <div class="main">
+    <div class="user">
+      <h3>for users</h3>
+      <p>MOVIE CRITIC is the world's most popular and authoritative source for information on movies,
+         TV shows and celebrities. Products and services to help fans .</p>
+      <a href="{{path('user_login')}}" class="btn btn-success " role="button" aria-pressed="true">Login</a>
+      <p>Do not have any account ? <a class="text-primary" href="{{path('user_registration')}}">sign-up</a></p>
+    </div>
+    <div class="admin">
+      <h3>for admin</h3>
+      <p>Analyze hundreds of millions of entertainment data points across 
+        200 million active fans, from Hollywood to Bollywood .</p>
+      <a href="{{path('admin_login')}}" class="btn btn-success " role="button" aria-pressed="true">Login</a>
+    </div>
+  </div>
+{% endblock %}
